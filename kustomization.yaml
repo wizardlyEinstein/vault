@@ -1,0 +1,10 @@
+images:
+- name: vaultwarden/server
+  newTag: 1.25.2-alpine
+
+namespace: vault 
+
+resources:
+- vault.yaml 
+- ingress.yaml
+
