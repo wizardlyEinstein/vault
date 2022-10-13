@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: vault-backup
+spec:
+  schedule: "0 */12 * * *"
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          initContainers:
+            - name: tar 
+              image: alpine 
+              volumeMounts:
+                - name: backup 
+                  mountPath: /backup
+                - name: data
+                  mountPath: /data
+              command: ["/bin/sh", "-c"]
+              args:
+                - tar -zcvf /backup/vault.tar /data  
+            - name: encrypt 
+              image: mozilla/sops:v3.7.3-alpine 
+              volumeMounts:
+                - name: data
+                  mountPath: /backup
+              command: ["/bin/sh", "-c"]
+              args: 
+                - sops --verbose --encrypt --in-place --age age1yzj8tdyqfz0c484jdfzs82g862d6e935txu2wz4w58ycsvcwqvxq2crzld /backup/vault.tar
+          containers:
+            - name: push 
+              image: google/cloud-sdk:386.0.0-alpine 
+              volumeMounts:
+                - name: data
+                  mountPath: /backup
+                - mountPath: /.secrets/gcp/gcpServiceUser.json
+                  name: gcpserviceuser
+                  subPath: gcpServiceUser.json
+              command: ["/bin/sh", "-c"]
+              args:
+                - gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS};
+                  gsutil cp -v /backup/vault.tar gs://32424361-154a-4ebd-843d-6763887ccfc4/vault.tar;
+              env:
+                - name: GOOGLE_APPLICATION_CREDENTIALS
+                  value: /.secrets/gcp/gcpServiceUser.json
+          restartPolicy: Never
+          volumes:
+            - name: backup 
+              emptyDir: {}
+            - name: gcpserviceuser
+              secret:
+                secretName: gcpserviceuser.json
+            - name: data
+              hostPath:
+                path: /storage/k3s/vault
+                type: DirectoryOrCreate
+

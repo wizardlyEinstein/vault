@@ -7,4 +7,8 @@ namespace: vault
 resources:
 - vault.yaml 
 - ingress.yaml
+- backup.yaml
+
+generators:
+- gcpServiceUser.yaml
 
