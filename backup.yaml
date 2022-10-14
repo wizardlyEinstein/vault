@@ -30,7 +30,7 @@ spec:
                 - sops --verbose --encrypt --in-place --age age1yzj8tdyqfz0c484jdfzs82g862d6e935txu2wz4w58ycsvcwqvxq2crzld /backup/vault.tar
           containers:
             - name: push 
-              image: google/cloud-sdk:386.0.0-alpine 
+              image: google/cloud-sdk:405.0.0-alpine 
               volumeMounts:
                 - name: data
                   mountPath: /backup
@@ -40,7 +40,7 @@ spec:
               command: ["/bin/sh", "-c"]
               args:
                 - gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS};
-                  gsutil cp -v /backup/vault.tar gs://32424361-154a-4ebd-843d-6763887ccfc4/vault.tar;
+                  gsutil -h Content-Type:application/octet-stream cp -v /backup/vault.tar gs://32424361-154a-4ebd-843d-6763887ccfc4/vault.tar;
               env:
                 - name: GOOGLE_APPLICATION_CREDENTIALS
                   value: /.secrets/gcp/gcpServiceUser.json
