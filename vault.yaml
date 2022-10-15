@@ -46,6 +46,27 @@ spec:
                 secretKeyRef:
                   name: secrets 
                   key: ADMIN_TOKEN 
+            - name: SMTP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: SMTP_USERNAME
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: SMTP_PASSWORD
+            - name: SMTP_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: SMTP_USERNAME
+            - name: SMTP_HOST 
+              value: smtp.gmail.com 
+            - name: SMTP_PORT 
+              value: "465" 
+            - name: SMTP_SECURITY 
+              value: force_tls 
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
