@@ -87,6 +87,8 @@ spec:
               value: force_tls 
             - name: WEBSOCKET_ENABLED 
               value: "true"
+            - name: SIGNUPS_DOMAINS_WHITELIST 
+              value: sway.org 
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
