@@ -24,4 +24,11 @@ spec:
             name: vault 
             port:
               number: 8080
+      - path: /notifications/hub 
+        pathType: Exact 
+        backend:
+          service:
+            name: websocket 
+            port:
+              number: 3012 
 
