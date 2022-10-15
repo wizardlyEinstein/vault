@@ -41,6 +41,11 @@ spec:
           env:
             - name: ROCKET_PORT 
               value: "8080"
+            - name: ADMIN_TOKEN 
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: ADMIN_TOKEN 
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

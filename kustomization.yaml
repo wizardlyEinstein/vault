@@ -11,4 +11,4 @@ resources:
 
 generators:
 - gcpServiceUser.yaml
-
+- secrets.yaml
