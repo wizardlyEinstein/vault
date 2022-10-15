@@ -39,6 +39,8 @@ spec:
         - name: vault 
           image: vaultwarden/server 
           env:
+            - name: DOMAIN 
+              value: https://vault.bender.sway.org 
             - name: ROCKET_PORT 
               value: "8080"
             - name: ADMIN_TOKEN 
