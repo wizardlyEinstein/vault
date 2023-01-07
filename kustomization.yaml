@@ -8,6 +8,7 @@ resources:
 - vault.yaml 
 - ingress.yaml
 - backup.yaml
+- volume.yaml
 
 generators:
 - gcpServiceUser.yaml

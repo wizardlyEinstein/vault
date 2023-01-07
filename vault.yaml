@@ -53,6 +53,7 @@ spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: vault 
           image: vaultwarden/server 
@@ -109,7 +110,5 @@ spec:
               port: http 
       volumes:
         - name: data
-          hostPath:
-           path: /storage/k3s/vault
-           type: DirectoryOrCreate
-
+          persistentVolumeClaim:
+            claimName: vault 
