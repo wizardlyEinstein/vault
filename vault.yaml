@@ -110,6 +110,6 @@ spec:
       volumes:
         - name: data
           hostPath:
-           path: /storage/k3s/vault
-           type: DirectoryOrCreate
+           path: /ssd/k3s/vault
+           type: Directory
 
