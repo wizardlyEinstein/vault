@@ -13,7 +13,20 @@ spec:
     - secretName: vault-bender-sway-org-tls
       hosts:
         - vault.bender.sway.org 
+    - secretName: vault-sindt-org-tls
+      hosts:
+        - vault.sindt.org 
   rules:
+  - host: vault.sindt.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vault 
+            port:
+              number: 8080
   - host: vault.bender.sway.org
     http:
       paths:
