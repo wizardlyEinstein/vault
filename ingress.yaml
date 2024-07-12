@@ -10,9 +10,6 @@ metadata:
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   tls:
-    - secretName: vault-bender-sway-org-tls
-      hosts:
-        - vault.bender.sway.org 
     - secretName: vault-sindt-org-tls
       hosts:
         - vault.sindt.org 
@@ -27,21 +24,3 @@ spec:
             name: vault 
             port:
               number: 8080
-  - host: vault.bender.sway.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: vault 
-            port:
-              number: 8080
-      - path: /notifications/hub 
-        pathType: Exact 
-        backend:
-          service:
-            name: websocket 
-            port:
-              number: 3012 
-
