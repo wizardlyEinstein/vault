@@ -81,6 +81,16 @@ spec:
                 secretKeyRef:
                   name: secrets 
                   key: SMTP_USERNAME
+            - name: YUBICO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: YUBICO_CLIENT_ID
+            - name: YUBICO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secrets 
+                  key: YUBICO_SECRET_KEY
             - name: SMTP_HOST 
               value: smtp.gmail.com 
             - name: SMTP_PORT 
