@@ -1,6 +1,6 @@
 images:
 - name: vaultwarden/server
-  newTag: 1.32.2-alpine
+  newTag: 1.32.3-alpine
 
 namespace: vault 
 
