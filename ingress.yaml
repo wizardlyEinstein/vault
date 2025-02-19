@@ -24,3 +24,10 @@ spec:
             name: vault 
             port:
               number: 8080
+      - path: /admin
+        pathType: Prefix
+        backend:
+          service:
+            name: vault
+            port:
+              number: 1234

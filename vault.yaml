@@ -11,6 +11,10 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: http
+    - name: badgateway
+      port: 1234
+      protocol: TCP
+      targetPort: 1234
   selector:
     app.kubernetes.io/name: vault
 ---
