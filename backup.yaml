@@ -56,6 +56,6 @@ spec:
                 secretName: gcpserviceuser.json
             - name: data
               hostPath:
-                path: /hdd/k3s/vault
+                path: /ssd/k3s/vault
                 type: Directory
 
